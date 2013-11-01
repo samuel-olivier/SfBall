@@ -21,7 +21,7 @@ class Clock;
 class Scene;
 class Ball;
 class Box;
-class Lap;
+class Bar;
 
 class SfBall {
 public:
@@ -41,10 +41,9 @@ private:
 
     sf::RenderWindow*     _window;
     sf::Clock*            _gameTimer;
-    Scene*		_scene;
+    Scene*                _scene;
     std::list<Ball*>      _balls;
-    std::list<Box*>       _boxes;
-    Lap*                  _playerLap;
+    Bar*                  _playerLap;
 };
 
 #endif

@@ -81,8 +81,6 @@ void	SfBall::_checkEvents() {
 void	SfBall::_physicUpdate() {
     std::list<Object*> const& objects = _scene->physicObjects();
 
-    std::cout << objects.size() << std::endl;
-
     for (std::list<Object*>::const_iterator it = objects.begin(); it != objects.end(); ++it)
         (*it)->update(_gameTimer);
     _gameTimer->restart();
