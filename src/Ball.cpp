@@ -13,8 +13,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-Ball::Ball(sf::Vector2f const& position, float radius) :
-    Circle(position, radius), _resize(NULL) {
+Ball::Ball(sf::Vector2f const& position, float radius, b2World *world) :
+    Circle(position, radius, world, Dynamic), _resize(NULL) {
 }
 
 Ball::~Ball() {
@@ -26,11 +26,12 @@ void Ball::resize(float newRadius, float duration) {
     _resize->init(radius(), newRadius, duration);
 }
 
-void Ball::update(sf::Clock *timer) {
-    Circle::update(timer);
+void Ball::update(sf::Clock *timer, SfBall* game) {
+    Circle::update(timer, game);
     if (_resize) {
         _resize->update();
         _resize->currentValue(_radius);
+        setRadius(radius());
         if (_resize->isFinished()) {
             delete _resize;
             _resize = NULL;

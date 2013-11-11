@@ -16,7 +16,7 @@
 class Circle : public Object
 {
 public:
-    Circle(sf::Vector2f const& position, float radius);
+    Circle(sf::Vector2f const& position, float radius, b2World* world, PhysicType physicType = Static);
     virtual ~Circle();
 
     virtual void	draw(std::list<sf::Drawable*>& toFill);
@@ -25,7 +25,8 @@ public:
     virtual float  radius() const;
 
 protected:
-    float	_radius;
+    float           _radius;
+    b2CircleShape   _shape;
 };
 
 #endif

@@ -16,12 +16,12 @@
 class Ball : public Circle
 {
 public:
-    Ball(sf::Vector2f const& position, float radius);
+    Ball(sf::Vector2f const& position, float radius, b2World* world);
     virtual ~Ball();
 
     virtual void  resize(float newRadius, float duration);
 
-    virtual void  update(sf::Clock* timer);
+    virtual void  update(sf::Clock* timer, SfBall *game);
 
 
 private:

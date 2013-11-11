@@ -75,7 +75,7 @@ find_path(SFML_INCLUDE_DIR SFML/Config.hpp
           /opt/local/  # DarwinPorts
           /opt/csw/    # Blastwave
           /opt/)
-
+MESSAGE(STATUS ${SFML_ROOT})
 # check the version number
 set(SFML_VERSION_OK TRUE)
 if(SFML_FIND_VERSION AND SFML_INCLUDE_DIR)
@@ -205,5 +205,5 @@ endif()
 
 # handle success
 if(SFML_FOUND)
-    message("Found SFML: ${SFML_INCLUDE_DIR}")
+    message(STATUS "Found SFML ${SFML_VERSION_MAJOR}.${SFML_VERSION_MINOR} in ${SFML_INCLUDE_DIR}")
 endif()

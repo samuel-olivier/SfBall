@@ -49,6 +49,13 @@ sf::Vector2<T>	operator*(sf::Vector2<T> const& left,
 }
 
 template<class T>
+sf::Vector2<T>	operator*(sf::Vector2<T> const& left,
+                          float right)
+{
+    return (sf::Vector2<T>(left.x * right, left.y * right));
+}
+
+template<class T>
 sf::Vector2<T>	abs(sf::Vector2<T> const& val)
 {
     return (sf::Vector2<T>(abs(val.x), abs(val.y)));

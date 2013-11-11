@@ -16,13 +16,13 @@
 class Box : public Rectangle
 {
 public:
-    Box(sf::Vector2f const& position, sf::Vector2f const& size);
+    Box(sf::Vector2f const& position, sf::Vector2f const& size, b2World* world, PhysicType physicType = Static);
     virtual ~Box();
 
-    virtual void  resize(sf::Vector2f const& newSize, float duration);
+    virtual void    resize(sf::Vector2f const& newSize, float duration);
+    bool            isResizing() const;
 
-    virtual void  update(sf::Clock* timer);
-
+    virtual void  update(sf::Clock* timer, SfBall *game);
 
 private:
     Animation<sf::Vector2f>*        _resize;

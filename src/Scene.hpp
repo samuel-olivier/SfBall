@@ -32,8 +32,10 @@ public:
 
     Scene&	operator<<(Object* obj);
 
-    template <class T*>
-    std::list<T*>   getObjects() const {
+    std::list<Object*>   allObjects() const;
+
+    template <class T>
+    std::list<T*>   objects() const {
         std::list<T*> res;
         T*  current = NULL;
 

@@ -8,35 +8,40 @@
 // Last update Fri Oct 18 20:51:01 2013 samuel olivier
 //
 
-#ifndef __Case_HPP__
-# define __Case_HPP__
+#ifndef __CASE_HPP__
+# define __CASE_HPP__
 
 # include "Box.hpp"
 
-class Ball;
+class SfBall;
 
 class Case : public Box
 {
 public:
-    Case(sf::Vector2f const& position);
+    Case(sf::Vector2f const& position, b2World* world);
     virtual ~Case();
 
-    virtual void  update(sf::Clock* timer);
+    virtual void        update(sf::Clock* timer, SfBall *game);
 
-    virtual Direction   collide(Ball* ball, sf::Vector2f* collisionPosition = NULL) const;
+    virtual void        contact(SfBall *game);
 
-    virtual void        contact();
+    virtual void        explode(SfBall *game);
 
-    virtual void        explode();
+    virtual void        makeBreakable();
+    virtual void        setBreakable(bool isBreakable);
+    virtual bool        isBreakable();
 
     virtual bool        isExploding() const;
 
-protected:
-    virtual bool        _collide(sf::Vector2f const& p1, sf::Vector2f const& p2, Ball* ball, sf::Vector2f* collisionPosition = NULL) const;
+    virtual void        setExplosionDuration(float duration);
+    virtual float       explosionDuration() const;
+    virtual float       explosionElapsedTime() const;
 
+protected:
     bool        _isExploding;
     sf::Clock   _explosionStart;
-
+    bool        _isBreakable;
+    float       _explosionDuration;
 };
 
 #endif

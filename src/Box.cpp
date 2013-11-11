@@ -14,8 +14,8 @@
 
 #include <SFML/Graphics.hpp>
 
-Box::Box(sf::Vector2f const& position, sf::Vector2f const& size) :
-    Rectangle(position, size), _resize(NULL) {
+Box::Box(sf::Vector2f const& position, sf::Vector2f const& size, b2World *world, PhysicType physicType) :
+    Rectangle(position, size, world, physicType), _resize(NULL) {
 }
 
 Box::~Box() {
@@ -27,11 +27,16 @@ void Box::resize(const sf::Vector2f &newSize, float duration) {
     _resize->init(size(), newSize, duration);
 }
 
-void Box::update(sf::Clock *timer) {
-    Rectangle::update(timer);
+bool Box::isResizing() const {
+    return _resize != NULL;
+}
+
+void Box::update(sf::Clock *timer, SfBall *game) {
+    Rectangle::update(timer, game);
     if (_resize) {
         _resize->update();
         _resize->currentValue(_size);
+        setSize(size());
         if (_resize->isFinished()) {
             delete _resize;
             _resize = NULL;

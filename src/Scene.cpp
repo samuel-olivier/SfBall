@@ -67,3 +67,7 @@ Scene&	Scene::operator<<(Object* obj) {
     return *this;
 }
 
+std::list<Object *> Scene::allObjects() const {
+    return _objects;
+}
+

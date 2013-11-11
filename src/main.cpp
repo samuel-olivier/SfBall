@@ -8,6 +8,8 @@
 // Last update Fri Nov  1 13:44:17 2013 samuel olivier
 //
 
+#include <iostream>
+
 #include "SfBall.hpp"
 
 int	main(int, char**)

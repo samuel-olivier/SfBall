@@ -11,6 +11,8 @@
 #ifndef __ANIMATION_HPP__
 # define __ANIMATION_HPP__
 
+# include <iostream>
+
 # include <SFML/System/Clock.hpp>
 # include <SFML/System/Vector2.hpp>
 # include <cmath>
@@ -45,7 +47,8 @@ public:
 
     void	update()
     {
-        float ellapsed = _timer.getElapsedTime().asMilliseconds();
+        float ellapsed = _timer.getElapsedTime().asSeconds();
+
         if (_type == Linear) {
             _currentValue = (ellapsed >= _duration) ? _end :
                                                       (_begin + ((_end - _begin) * (ellapsed / _duration)));
@@ -68,7 +71,7 @@ public:
 
     bool		isFinished() const
     {
-        return (_duration < _timer.getElapsedTime().asMilliseconds());
+        return (_duration < _timer.getElapsedTime().asSeconds());
     }
 
     void		setDuration(float newDuration)
@@ -82,11 +85,11 @@ public:
     }
 
 private:
-    float			_duration;
-    sf::Clock		_timer;
-    T			_begin;
-    T			_end;
-    T			_currentValue;
+    float               _duration;
+    sf::Clock           _timer;
+    T                   _begin;
+    T                   _end;
+    T               	_currentValue;
     InterpolationType	_type;
 };
 

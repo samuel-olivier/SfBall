@@ -6,14 +6,7 @@ PROJECT ("SfBall")
 # CMake Configuration
 #
 
-SET (GCC46_PATH
-  "/usr/bin/g++-4.6"
-)
-IF (EXISTS ${GCC46_PATH})
-   SET (CMAKE_CXX_COMPILER ${GCC46_PATH})
-ENDIF ()
-
-SET (CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra -Wno-ignored-qualifiers")
+SET (CMAKE_CXX_FLAGS "-std=c++0x -Wall -D_USE_MATH_DEFINES")
 
 #
 # Custom CMake modules
@@ -62,7 +55,7 @@ FILE (
 
 # DxBall
 ADD_EXECUTABLE (
-    DxBall
+    SfBall
     ${SFBALL_SOURCES}
 )
 
@@ -72,8 +65,9 @@ ADD_EXECUTABLE (
 
 # DxBall
 TARGET_LINK_LIBRARIES (
-    DxBall
+    SfBall
     ${SFML_LIBRARIES}
+	Box2D
 )
 
 #
@@ -83,16 +77,16 @@ TARGET_LINK_LIBRARIES (
 # DxBall bundle
 
 SET_PROPERTY (
-    TARGET DxBall
+    TARGET SfBall
     PROPERTY RUNTIME_OUTPUT_DIRECTORY ${SFBALL_BUNDLE_PATH}
 )
 
 SET_PROPERTY (
-    TARGET DxBall
+    TARGET SfBall
     PROPERTY RUNTIME_OUTPUT_DIRECTORY_DEBUG ${SFBALL_BUNDLE_PATH}
 )
 
 SET_PROPERTY (
-    TARGET DxBall
+    TARGET SfBall
     PROPERTY RUNTIME_OUTPUT_DIRECTORY_RELEASE ${SFBALL_BUNDLE_PATH}
 )

@@ -13,8 +13,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-Circle::Circle(sf::Vector2f const& position, float radius) :
-    Object(position), _radius(radius) {
+Circle::Circle(sf::Vector2f const& position, float radius, b2World *world, PhysicType physicType) :
+    Object(position, world, physicType), _radius(radius) {
+    if (_body) {
+        setRadius(_radius);
+        b2FixtureDef def = _defaultFixtureDef;
+        def.shape= &_shape;
+        _fixtureDefs.push_back(def);
+        _createFixtures();
+    }
 }
 
 Circle::~Circle() {
@@ -24,15 +31,18 @@ void	Circle::draw(std::list<sf::Drawable*>& toFill) {
     sf::Vector2f const&	pos = position();
     sf::CircleShape*	res =
             new sf::CircleShape(_radius);
+
     res->setOrigin(_radius, _radius);
     res->setPosition(pos);
     res->setRotation(angle() * 180 / M_PI);
-    res->setFillColor(sf::Color());
+    res->setFillColor(color());
     toFill.push_back(res);
 }
 
 void  Circle::setRadius(float radius) {
     _radius = radius;
+    if (_body)
+        _shape.m_radius = radius;
 }
 
 float  Circle::radius() const {
