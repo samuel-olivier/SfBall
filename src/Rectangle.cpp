@@ -121,7 +121,7 @@ void Rectangle::setTopLeft(const sf::Vector2f &topLeft) {
     setTop(topLeft.y);
 }
 
-const sf::Vector2f &Rectangle::topLeft() const {
+sf::Vector2f Rectangle::topLeft() const {
     return sf::Vector2f(left(), top());
 }
 
@@ -130,7 +130,7 @@ void Rectangle::setTopRight(const sf::Vector2f &topRight) {
     setTop(topRight.y);
 }
 
-const sf::Vector2f &Rectangle::topRight() const {
+sf::Vector2f Rectangle::topRight() const {
     return sf::Vector2f(right(), top());
 }
 
@@ -139,7 +139,7 @@ void Rectangle::setBottomLeft(const sf::Vector2f &bottomLeft) {
     setBottom(bottomLeft.y);
 }
 
-const sf::Vector2f &Rectangle::bottomLeft() const {
+sf::Vector2f Rectangle::bottomLeft() const {
     return sf::Vector2f(left(), bottom());
 }
 
@@ -148,6 +148,6 @@ void Rectangle::setBottomRight(const sf::Vector2f &bottomRight) {
     setBottom(bottomRight.y);
 }
 
-const sf::Vector2f &Rectangle::bottomRight() const {
+sf::Vector2f Rectangle::bottomRight() const {
     return sf::Vector2f(right(), bottom());
 }

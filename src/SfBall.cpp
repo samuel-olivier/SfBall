@@ -74,7 +74,7 @@ void    SfBall::_initNewGame() {
 
     Ball* ball = new Ball(sf::Vector2f(5.5, 5.5), 0.15, _gameWorld);
     ball->setName("Ball_1");
-    ball->setSpeed(sf::Vector2f(1, 5));
+    ball->setSpeed(sf::Vector2f(1, 5) * 0.5f);
     *_scene << ball;
     _balls.push_back(ball);
     Case* current;
@@ -127,18 +127,44 @@ void SfBall::PreSolve(b2Contact *contact, const b2Manifold *oldManifold) {
     }
     if (!currentBall || !currentObject)
         return ;
-    Case* currentCase = NULL;
-    Wall* currentWall = NULL;
+    Case*   currentCase = NULL;
+    Wall*   currentWall = NULL;
+    Bar*    currentBar = NULL;
     if ((currentCase = dynamic_cast<Case*>(currentObject)) != NULL) {
         currentCase->contact(this);
     } else if ((currentWall = dynamic_cast<Wall*>(currentObject)) != NULL) {
         if (currentWall == _bottomWall)
             std::cout << "LOOOOSE" << std::endl;
+    } else if ((currentBar = dynamic_cast<Bar*>(currentObject)) != NULL) {
+
+    } else {
+        contact->SetEnabled(false);
+        return ;
     }
 }
 
 void SfBall::PostSolve(b2Contact *contact, const b2ContactImpulse *impulse) {
+    Object* objA = (Object*)contact->GetFixtureA()->GetBody()->GetUserData();
+    Object* objB = (Object*)contact->GetFixtureB()->GetBody()->GetUserData();
+    Ball* currentBall = dynamic_cast<Ball*>(objA);
+    Object* currentObject = NULL;
 
+    if (!currentBall) {
+        currentBall = dynamic_cast<Ball*>(objB);
+        currentObject = objA;
+    } else {
+        currentObject = objB;
+    }
+    if (!currentBall || !currentObject)
+        return ;
+    Case*   currentCase = NULL;
+    Wall*   currentWall = NULL;
+    Bar*    currentBar = NULL;
+    if ((currentCase = dynamic_cast<Case*>(currentObject)) != NULL ||
+        (currentWall = dynamic_cast<Wall*>(currentObject)) != NULL) {
+        std::cout << currentBall->body()->GetLinearVelocity().x << ":" << currentBall->body()->GetLinearVelocity().y << std::endl;
+    } else if ((currentBar = dynamic_cast<Bar*>(currentObject)) != NULL) {
+    }
 }
 
 void	SfBall::_update() {
@@ -159,6 +185,8 @@ void	SfBall::_checkEvents() {
                 _playerBar->extend();
             else if (event.key.code == sf::Keyboard::Down)
                 _playerBar->shrink();
+            else if (event.key.code == sf::Keyboard::Escape)
+                _window->close();
         } else if (event.type == sf::Event::MouseButtonPressed) {
 
         } else if (event.type == sf::Event::MouseButtonReleased) {
@@ -188,8 +216,8 @@ void	SfBall::_updateObjects() {
         _playerBar->setX(worldWidth - barSize / 2);
     }
 
-    for (int i = 0; i < 10; ++i)
-      _gameWorld->Step(1.0 / 200, 6, 20);
+    for (int i = 0; i < 20; ++i)
+      _gameWorld->Step(1.0 / 200, 6, 8);
     std::list<Object*> objects = _scene->allObjects();
 
     for (std::list<Object*>::iterator it = objects.begin(); it != objects.end(); ++it) {

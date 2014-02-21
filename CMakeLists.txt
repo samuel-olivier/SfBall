@@ -36,6 +36,7 @@ FIND_PACKAGE (SFML 2 REQUIRED system window graphics)
 
 INCLUDE_DIRECTORIES (
     ${SFML_INCLUDE_DIR}
+	"include/"
 )
 
 #
@@ -67,7 +68,7 @@ ADD_EXECUTABLE (
 TARGET_LINK_LIBRARIES (
     SfBall
     ${SFML_LIBRARIES}
-	Box2D
+    ${CMAKE_SOURCE_DIR}/lib/libBox2D.a
 )
 
 #

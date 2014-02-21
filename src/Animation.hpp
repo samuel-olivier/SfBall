@@ -12,10 +12,11 @@
 # define __ANIMATION_HPP__
 
 # include <iostream>
-
+# include <cmath>
 # include <SFML/System/Clock.hpp>
 # include <SFML/System/Vector2.hpp>
-# include <cmath>
+
+# include "Math.hpp"
 
 template<class T>
 class Animation

@@ -16,7 +16,7 @@
 #include <SFML/Graphics.hpp>
 
 Object::Object(sf::Vector2f const& pos, b2World *world, PhysicType physicType) :
-    _position(pos), _world(world), _physicType(physicType), _needDelete(false) {
+    _world(world), _physicType(physicType), _position(pos), _needDelete(false) {
     _init();
 }
 

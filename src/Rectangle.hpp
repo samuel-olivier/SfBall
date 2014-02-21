@@ -44,16 +44,16 @@ public:
     float           bottom() const;
 
     void                setTopLeft(sf::Vector2f const& topLeft);
-    sf::Vector2f const& topLeft() const;
+    sf::Vector2f topLeft() const;
 
     void                setTopRight(sf::Vector2f const& topRight);
-    sf::Vector2f const& topRight() const;
+    sf::Vector2f topRight() const;
 
     void                setBottomLeft(sf::Vector2f const& bottomLeft);
-    sf::Vector2f const& bottomLeft() const;
+    sf::Vector2f bottomLeft() const;
 
     void                setBottomRight(sf::Vector2f const& bottomRight);
-    sf::Vector2f const& bottomRight() const;
+    sf::Vector2f bottomRight() const;
 
 protected:
     b2PolygonShape      _shape;

@@ -13,6 +13,9 @@
 
 # include <iostream>
 # include <SFML/System/Vector2.hpp>
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 template<class T>
 float	vector2Norm(sf::Vector2<T> const& vec)
@@ -48,12 +51,12 @@ sf::Vector2<T>	operator*(sf::Vector2<T> const& left,
     return (sf::Vector2<T>(left.x * right.x, left.y * right.y));
 }
 
-template<class T>
-sf::Vector2<T>	operator*(sf::Vector2<T> const& left,
-                          float right)
-{
-    return (sf::Vector2<T>(left.x * right, left.y * right));
-}
+//template<class T>
+//sf::Vector2<T>	operator*(sf::Vector2<T> const& left,
+//                          float right)
+//{
+//    return (sf::Vector2<T>(left.x * right, left.y * right));
+//}
 
 template<class T>
 sf::Vector2<T>	abs(sf::Vector2<T> const& val)
